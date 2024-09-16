@@ -1,6 +1,4 @@
 'use client';
-import Image from "next/image";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import axios from 'axios';
 import type { FormEvent } from "react";
