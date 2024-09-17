@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextApiRequest} from "next";
 
 interface REQUEST extends NextApiRequest {
-    json(): Promise<any>;
+    json(): Promise<{ data: { prompt: string } }>;
 }
 
 
