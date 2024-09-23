@@ -4,6 +4,7 @@ import axios from 'axios';
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import showdown from 'showdown';
+import Image from "next/image";
 
 
 export default function Home() {
@@ -12,11 +13,16 @@ const [prompt, setPrompt] = useState<string>("");
 const [res, setRes] = useState<Array<string>>([]);
 const [question, setQuestion] = useState<Array<string>>([]);
 const [loading , setLoading] = useState<boolean>(false);
+const [scroll, setScroll] =  useState<boolean>(false);
 
-
+if(scroll){
+  window.scrollTo(0, document.body.scrollHeight);
+  setScroll(false);
+}
 
 const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+  if(!prompt) return;
   const prevQuestion = [...question, prompt]
   setQuestion(prevQuestion);
   setLoading(true);
@@ -31,12 +37,14 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
     
   }).then(() => {
   setLoading(false);
+  setScroll(true);
   })
 }
+  
 
   return (
   <div className="bg-black p-10 lg:px-72 overflow-y-scroll flex flex-col justify-center items-center">
-    <div className="p-10 rounded-3xl bg-gray-500 flex flex-col gap-10 bg-opacity-50">
+    <div className="p-10 rounded-3xl w-full flex flex-col gap-10 ">
       {!loading ?
       <>
       {res.length !== 0 ?
@@ -44,13 +52,24 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
       {res.map((result , i) => {
         const converter = new showdown.Converter();
         const html = converter.makeHtml(result);
+        const id = i.toString();
+      
+        
         return (
-          <div key={i} className="flex border-b-2 border-black py-10 items-center flex-col gap-5">
-      <p className="text-3xl font-bold border-b-2 border-black w-fit text-center bg-black rounded-3xl px-5 py-3"> {question[i]}</p>
-       <p className="text-2xl bg-black rounded-3xl px-5 py-3">
-        <span className="font-bold">Gemini : </span>
+          <div key={i} className="flex border-b-2 border-black py-10 lg:w-full flex-col gap-5">
+            <div>
+      <p className="text-3xl font-bold border-b-2 flex flex-col lg:w-full border-black w-fit items-end justify-end gap-5">
+        <Image src="/User.png" width={50} height={50} alt="User" />
+        <span className="bg-white bg-opacity-20 px-5 py-3 rounded-3xl"> {question[i]}</span>
+        
+         </p>
+         </div>
+         <div className="flex flex-col gap-5">
+          <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
+       <p className="text-2xl w-fit bg-white bg-opacity-20 rounded-3xl px-5 py-3">
           <span  id={i.toString()} dangerouslySetInnerHTML={{__html: html}}></span>
         </p>
+        </div>
       </div>
         )
       })
@@ -58,10 +77,16 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
 }
       </>
        : 
-       <p className="text-2xl text-center">How can i help you</p>}
+       <div className=" flex flex-col justify-start w-full h-1/2 gap-5">
+       <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
+       <p className="text-2xl bg-opacity-20 bg-white px-5 py-3 rounded-3xl w-fit ">How can i help you</p>
+       </div>
+       }
        </> :
        <div className=" flex justify-center h-1/2 text-opacity-50 ">
-        <span className="text-3xl bg-black animate-pulse rounded-3xl px-5 py-3">Loading...</span>
+        <span className=" animate-spin">
+          <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
+        </span>
         </div>
       }
       
