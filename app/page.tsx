@@ -43,32 +43,46 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
   
 
   return (
-  <div className="bg-black p-10 lg:px-72 overflow-y-scroll flex flex-col justify-center items-center">
+  <div className="bg-black lg:p-10 lg:px-72 overflow-y-scroll flex flex-col justify-center items-center">
+    <div id="headerDiv" className="bg-gradient-to-r from-fuchsia-500 to-blue-700 bg-clip-text">
+      <h1 id="header" className="text-5xl lg:text-6xl py-10 px-5 text-transparent ">Creative AI</h1>
+    <div id="header's underline" className="w-full h-0.5 bg-gradient-to-r from-fuchsia-500 to-blue-700 text-transparent">h</div>      
+    </div>
     <div className="p-10 rounded-3xl w-full flex flex-col gap-10 ">
       {!loading ?
       <>
+      
       {res.length !== 0 ?
       <>
       {res.map((result , i) => {
+        // converts the response to html to be displayed 
         const converter = new showdown.Converter();
         const html = converter.makeHtml(result);
-        const id = i.toString();
-      
         
+      // Response screen 
         return (
-          <div key={i} className="flex border-b-2 border-black py-10 lg:w-full flex-col gap-5">
-            <div>
-      <p className="text-3xl font-bold border-b-2 flex flex-col lg:w-full border-black w-fit items-end justify-end gap-5">
+          <div key={i}  className="flex border-b-2 border-black lg:py-10 lg:w-full flex-col gap-5">
+            <div className="flex flex-col items-end">
+      <p className="lg:text-3xl text-lg font-bold border-b-2 flex flex-col lg:w-full border-black w-fit items-end gap-5">
         <Image src="/User.png" width={50} height={50} alt="User" />
         <span className="bg-white bg-opacity-20 px-5 py-3 rounded-3xl"> {question[i]}</span>
         
          </p>
          </div>
-         <div className="flex flex-col gap-5">
+         <div className="flex flex-col gap-5 "> 
           <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
-       <p className="text-2xl w-fit bg-white bg-opacity-20 rounded-3xl px-5 py-3">
-          <span  id={i.toString()} dangerouslySetInnerHTML={{__html: html}}></span>
-        </p>
+          <div className="overflow-x-scroll rounded-3xl ">
+       <p className="lg:text-2xl text-sm bg-white bg-opacity-20 w-fit  rounded-3xl px-5 lg:mb-0 py-3">
+          <span 
+           ref={(span) => { 
+            if(span){
+      span.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
+           className="w-full font-semibold" id={i.toString()} dangerouslySetInnerHTML={{__html: html}}></span> 
+        </p> 
+     </div> 
+      <div className="text-transparent bg-gradient-to-r from-fuchsia-500 to-blue-700 mb-24 h-0.5 lg:w-1/3 w-1/2">h</div>
         </div>
       </div>
         )
@@ -77,25 +91,31 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
 }
       </>
        : 
+       // Welcome screen
        <div className=" flex flex-col justify-start w-full h-1/2 gap-5">
        <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
        <p className="text-2xl bg-opacity-20 bg-white px-5 py-3 rounded-3xl w-fit ">How can i help you</p>
        </div>
        }
        </> :
+       // Loading screen
        <div className=" flex justify-center h-1/2 text-opacity-50 ">
         <span className=" animate-spin">
-          <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
+          <Image src="/Gemini.png" width={100} height={100} alt="Gemini" />
         </span>
         </div>
       }
       
     </div>
-      <form className="p-10  flex flex-row fixed z-10 gap-5 justify-center bottom-0 w-full" method="post" onSubmit={handleSubmit}>
+      <form className="p-10  flex flex-row  fixed z-10 gap-5 justify-center bottom-0 w-full" method="post" onSubmit={handleSubmit}>
+        <div className=" bg-neutral-800  rounded-3xl flex  items-center lg:w-1/3 px-5 py-3 lg:flex lg:justify-between">
       <input onChange={(e) => setPrompt(e.target.value)} value={prompt} 
-      className="bg-gray-700 px-5 py-3 rounded-3xl text-opacity-50  w-1/3 h-full text-center"
-       name="prompt" type="text" placeholder="Enter a prompt" autoComplete="off"/>
-      <Button className="border-gray-500 border-2 rounded-3xl px-5 py-3 h-full font-bold " type="submit">Submit</Button>
+      className="bg-transparent px-5 py-3 rounded-3xl lg:text-2xl text-opacity-50  lg:w-full h-full focus:outline-none"
+       name="prompt" type="text" autoFocus={true}  placeholder="Enter a prompt" autoComplete="off"/>
+      <Button className="bg-neutral-700 rounded-full h-full hover:bg-neutral-600 p-2 " type="submit">
+        <Image src="/Send.png" width={40} height={40} alt="Submit" />
+      </Button>
+      </div>
     </form>
   </div>
   );
