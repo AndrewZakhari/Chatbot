@@ -43,7 +43,7 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
   
 
   return (
-  <div className="bg-black lg:p-10 lg:px-72 overflow-y-scroll flex flex-col justify-center items-center">
+  <div className="bg-black lg:p-10 lg:px-72 dark:text-white min-h-screeen overflow-y-scroll flex flex-col justify-center items-center">
     <div id="headerDiv" className="bg-gradient-to-r from-fuchsia-500 to-blue-700 bg-clip-text">
       <h1 id="header" className="text-5xl lg:text-6xl py-10 px-5 text-transparent ">Creative AI</h1>
     <div id="header's underline" className="w-full h-0.5 bg-gradient-to-r from-fuchsia-500 to-blue-700 text-transparent">h</div>      
@@ -61,7 +61,7 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
         
       // Response screen 
         return (
-          <div key={i}  className="flex border-b-2 border-black lg:py-10 lg:w-full flex-col gap-5">
+          <div key={i}  className="flex border-b-2 text-white border-black lg:py-10 lg:w-full flex-col gap-5">
             <div className="flex flex-col items-end">
       <p className="lg:text-3xl text-lg font-bold border-b-2 flex flex-col lg:w-full border-black w-fit items-end gap-5">
         <Image src="/User.png" width={50} height={50} alt="User" />
@@ -70,14 +70,16 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
          </p>
          </div>
          <div className="flex flex-col gap-5 "> 
-          <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
-          <div className="overflow-x-scroll rounded-3xl ">
-       <p className="lg:text-2xl text-sm bg-white bg-opacity-20 w-fit  rounded-3xl px-5 lg:mb-0 py-3">
+          <Image src="/Logo.png" width={100} height={100} alt="Logo" />
+          <div className=" overflow-x-scroll lg:overflow-x-hidden rounded-3xl ">
+       <p className="lg:text-2xl text-sm bg-white bg-opacity-20 w-fit rounded-3xl px-5 lg:mb-0 py-3">
           <span 
            ref={(span) => { 
+            if(!prompt){
             if(span){
       span.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+          }
           }}
            className="w-full font-semibold" id={i.toString()} dangerouslySetInnerHTML={{__html: html}}></span> 
         </p> 
@@ -92,28 +94,28 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
       </>
        : 
        // Welcome screen
-       <div className=" flex flex-col justify-start w-full h-1/2 gap-5">
-       <Image src="/Gemini.png" width={50} height={50} alt="Gemini" />
+       <div className=" flex flex-col text-white min-h-screen justify-start w-full h-1/2 gap-5">
+       <Image src="/Logo.png" width={100} height={100} alt="logo" />
        <p className="text-2xl bg-opacity-20 bg-white px-5 py-3 rounded-3xl w-fit ">How can i help you</p>
        </div>
        }
        </> :
        // Loading screen
-       <div className=" flex justify-center h-1/2 text-opacity-50 ">
-        <span className=" animate-spin">
-          <Image src="/Gemini.png" width={100} height={100} alt="Gemini" />
+       <div className=" flex justify-center min-h-screen h-1/2 text-opacity-50 ">
+        <span className=" animate-spin h-fit">
+          <Image className="rounded-full" src="/Logo.png" width={250} height={250} alt="logo" />
         </span>
         </div>
       }
       
     </div>
-      <form className="p-10  flex flex-row  fixed z-10 gap-5 justify-center bottom-0 w-full" method="post" onSubmit={handleSubmit}>
+      <form className="p-10  flex flex-row text-white fixed z-10 gap-5 justify-center bottom-0 w-full" method="post" onSubmit={handleSubmit}>
         <div className=" bg-neutral-800  rounded-3xl flex  items-center lg:w-1/3 px-5 py-3 lg:flex lg:justify-between">
       <input onChange={(e) => setPrompt(e.target.value)} value={prompt} 
       className="bg-transparent px-5 py-3 rounded-3xl lg:text-2xl text-opacity-50  lg:w-full h-full focus:outline-none"
        name="prompt" type="text" autoFocus={true}  placeholder="Enter a prompt" autoComplete="off"/>
       <Button className="bg-neutral-700 rounded-full h-full hover:bg-neutral-600 p-2 " type="submit">
-        <Image src="/Send.png" width={40} height={40} alt="Submit" />
+        <Image src="/Send.png" width={50} height={50} alt="Submit" />
       </Button>
       </div>
     </form>
