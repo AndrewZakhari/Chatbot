@@ -17,7 +17,6 @@ const prompt = reqPrompt.data.prompt;
 
 
 const result = await model.generateContent(prompt);
-console.log(result.response.text());
     return new Response(
             result.response.text()
     );
