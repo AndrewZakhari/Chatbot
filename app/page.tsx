@@ -4,7 +4,7 @@ import Image from "next/image"
 
 const Home = () => {
     return (
-        <div className="bg-[url('/backgroundElipse.png')] bg-fixed md:bg-cover
+        <div className="bg-[url('/backgroundElipse.png')] bg-fixed md:bg-cover overflow-x-hidden bg-black text-white min-h-screen
          bg-no-repeat lg:bg-[url('/backgroundDesktop.png')] lg:bg-center md:min-h-screen">
             <div className="mx-12 lg:mx-0 lg:mb-16 flex flex-col items-center lg:items-start">
                 <div className=" lg:flex lg:flex-col lg:items-center lg:w-screen">
