@@ -28,11 +28,11 @@ const Home = () => {
              <div className="bg-[url('/promptBg.png')] md:w-[500px]
              lg:bg-[url('/promptBgDesk.png')] lg:px-5 lg:py-3 lg:w-max lg:my-8
               rounded-xl my-5 bg-cover overflow-hidden">
-                <p className=" p-5 pl-10 lg:text-3xl">Hi there! I'm Creative AI, and I'm here to help you bring your ideas to life.
+                <p className=" p-5 pl-10 lg:text-3xl">Hi there! I&apos;m Creative AI, and I&apos;m here to help you bring your ideas to life.
                      I can generate creative  text formats, like poems, code, scripts,
                      musical pieces, email, letters, etc. I can also answer your questions in an informative way,
-                     even if  they're open ended, challenging, or strange. My purpose is to be a 
-                     helpful and creative tool, and I'm always learning and improving. What  can I help you with today?</p>
+                     even if  they&apos;re open ended, challenging, or strange. My purpose is to be a 
+                     helpful and creative tool, and I&apos;m always learning and improving. What  can I help you with today?</p>
              </div>
              </div>
         </div>
