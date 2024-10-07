@@ -27,7 +27,7 @@ const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
   const prevQuestion = [...question, prompt]
   setQuestion(prevQuestion);
   setLoading(true);
-  axios.post('/api', {
+  axios.post('/api/chat', {
     data : {
       prompt: prompt
     }
